@@ -42,6 +42,22 @@ axis([-2/Fs 32/Fs -1.5 1.5]);
 
 
 %partD
+%1
+bn0 = [1 0 0 0.9];
+a = [1 0 0 0];
+f = filter(bn0, a, pulse);
+
+n = 0:1:14;
+
+stem(n,f);
+
+%2
+bn1 = [2 0 0 0.9];
+bn2 = [4 0 0 0.7];
+f1 = filter(bn1,a,pulse);
+bn = filter(bn2,a,f1);
+
+
 
 
 
