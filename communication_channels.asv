@@ -3,15 +3,20 @@ pulse = [zeros(1,2),ones(1,10),zeros(1,2)]; %1. zeros and ones making the pulse
 ind1 = [0:1:13]; %setting the indices to have 14 places for the stem plot
 figure
 stem(ind1,pulse); %the stem plot for PART A
-title("PROTOTYPE PULSE")
-xlabel("")
-
+title("PROTOTYPE PULSE");
+xlabel("DT Time Index");
+ylabel("Pulse Value")
 
 %PART B
 rng(00708981); %1. random number generator
 bits = randi([0 1],1,20);%3 randi command to create a random sequence of 1x20 vector
 ind = [1:1:20];%indices matching the 20 arrays for stem plot 
+figure
 stem(ind,bits);% 4. Stem plot-1  for PART B
+title("RANDOM BIT STREAM");
+xlabel("Indices");
+ylabel("Random Bit Value");
+
 
 B = bits; % initializing B for the conversion of 0s to -1s
 
@@ -24,7 +29,10 @@ for i = 1:20 %5. Conversion of 0s to -1 in a for loop and leaving the 1s to be 1
     end 
 end
 
+figure
 stem(ind,B); %6. Stem plot-2 for PART B
+title("RANDOM BIT STREAM MODIFIED");
+xlabel("Indices")
 
 %PART C
 negpulse = -pulse; %creating an inverted pulse of the prototype pulse
