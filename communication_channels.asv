@@ -32,7 +32,8 @@ end
 figure
 stem(ind,B); %6. Stem plot-2 for PART B
 title("RANDOM BIT STREAM MODIFIED");
-xlabel("Indices")
+xlabel("Indices");
+ylabel("Random Bit Value");
 
 %PART C
 negpulse = -pulse; %creating an inverted pulse of the prototype pulse
@@ -49,30 +50,41 @@ end
 
 Fs = 10e3;%2. Sampling Rate is 10kHz
 t = [0:1/Fs:279/Fs]; % creating a time period for the 280 elements in x with the sampling rate of Fs = 10kHz
+figure
 plot(t,x);% plot of x and t
+title("DT PULSE");
+xlabel("Time (sec)")
+ylabel("DT Values")
+
         
-axis([-2/Fs 32/Fs -1.5 1.5]); % restricing 
+axis([-2/Fs 32/Fs -1.5 1.5]); % restricing the plot according to the guide
 
 
 %partD
 %1
-bn0 = [1 0 0 0.9];
-a = [1 0 0 0];
-f = filter(bn0, a, pulse);
+bn0 = [1 0 0 0.9]; %initial bn coefficients
+a = [1 0 0 0]; %default aa value
+f = filter(bn0, a, pulse); %a) running the pulse through the filter
 
-n = 1:1:13;
+n = 1:1:14; %indices for the stem plot 
 
-stem(n,f);
+figure
+stem(n,f);%b) stem plot for the filter
+title("Output vs n")
+xlabel("n vallues")
+ylabel("output values from the filter")
 
 %2
-bn1 = [2 0 0 0.9];
-bn2 = [4 0 0 0.7];
-f1 = filter(bn1,a,pulse);
-bn = filter(bn2,a,f1);
+bn1 = [6 0 0 0.9];% bn1 for sampling 6 and amplitude of 0.9
+bn2 = [12 0 0 0.7]; %bn2 do sampling and amplitude of 0.7
+f1 = filter(bn1,a,pulse); % passing pulse through bn1
+bn = filter(bn2,a,f1); % passing f1(bn1) through bn2
+figure
 zplane(bn) % a)pole-zero
-[H,f] = freqz(bn) %b) freq resp
+title
+[H,f] = freqz(bn) %freq resp
 dbbn = mag2db(abs(H)); %convert to decibal scale
-plot(f/pi,dbbn)
+plot(f/pi,dbbn)%b) plotting frequency response in dB scale
 
 
 
