@@ -75,15 +75,23 @@ xlabel("n vallues")
 ylabel("output values from the filter")
 
 %2
-bn1 = [2 0 0 0.9];
-bn2 = [4 0 0 0.7];
-f1 = filter(bn1,a,pulse);
-bn = filter(bn2,a,f1);
+bn1 = [6 0 0 0.9];% bn1 for sampling 6 and amplitude of 0.9
+bn2 = [12 0 0 0.7]; %bn2 do sampling and amplitude of 0.7
+f1 = filter(bn1,a,pulse); % passing pulse through bn1
+bn = filter(bn2,a,f1); % passing f1(bn1) through bn2
+
 figure
 zplane(bn) % a)pole-zero
-[H,f] = freqz(bn) %b) freq resp
+title("Pole-Zero Plot")
+
+[H,f] = freqz(bn) %freq resp
 dbbn = mag2db(abs(H)); %convert to decibal scale
-plot(f/pi,dbbn)
+
+figure 
+plot(f/pi,dbbn)%b) plotting frequency response in dB scale
+title("Frequency Response (dB Scale)")
+xlabel("frequency(rad/sec)")
+ylabel("Magnitude (dB)")
 
 
 
