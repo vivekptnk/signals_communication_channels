@@ -81,10 +81,10 @@ f1 = filter(bn1,a,pulse); % passing pulse through bn1
 bn = filter(bn2,a,f1); % passing f1(bn1) through bn2
 
 figure
-zplane(bn) % a)pole-zero
+zplane(bn); % a)pole-zero
 title("Pole-Zero Plot")
 
-[H,f] = freqz(bn) %freq resp
+[H,f] = freqz(bn); %freq resp
 dbbn = mag2db(abs(H)); %convert to decibal scale
 
 figure 
@@ -92,6 +92,30 @@ plot(f/pi,dbbn)%b) plotting frequency response in dB scale
 title("Frequency Response (dB Scale)")
 xlabel("frequency(rad/sec)")
 ylabel("Magnitude (dB)")
+
+
+%3
+y = filter(bn,a,x); % a) applying input x to the filter with derived bn and default aa
+tt = [0:1/Fs:279/Fs]; % time for both input and output signals with sampling rate 10kHz
+
+subplot(2,1,1)
+plot(tt,x);
+title("Input Signal")
+ylabel("Input Values x")
+xlabel("Time (sec)")
+axis([-2/Fs 32/Fs -1.5 1.5])
+
+subplot(2,1,2)
+plot(tt,y);
+title("Onput Signal")
+ylabel("Onput Values y")
+xlabel("Time (sec)")
+axis([-2/Fs 32/Fs -900 900])
+
+
+
+
+
 
 
 
