@@ -57,24 +57,29 @@ xlabel("Time (sec)")
 ylabel("DT Values")
 
         
-axis([-2/Fs 32/Fs -1.5 1.5]); % restricing 
+axis([-2/Fs 32/Fs -1.5 1.5]); % restricing the plot according to the guide
 
 
 %partD
 %1
-bn0 = [1 0 0 0.9];
-a = [1 0 0 0];
-f = filter(bn0, a, pulse);
+bn0 = [1 0 0 0.9]; %initial bn coefficients
+a = [1 0 0 0]; %default aa value
+f = filter(bn0, a, pulse); %a) running the pulse through the filter
 
-n = 1:1:13;
+n = 1:1:14; %indices for the stem plot 
 
-stem(n,f);
+figure
+stem(n,f);%b) stem plot for the filter
+title("Output vs n")
+xlabel("n vallues")
+ylabel("output values from the filter")
 
 %2
 bn1 = [2 0 0 0.9];
 bn2 = [4 0 0 0.7];
 f1 = filter(bn1,a,pulse);
 bn = filter(bn2,a,f1);
+figure
 zplane(bn) % a)pole-zero
 [H,f] = freqz(bn) %b) freq resp
 dbbn = mag2db(abs(H)); %convert to decibal scale
