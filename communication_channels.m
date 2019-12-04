@@ -71,7 +71,7 @@ n = 1:1:14; %indices for the stem plot
 figure
 stem(n,f);%b) stem plot for the filter
 title("Output vs n")
-xlabel("n vallues")
+xlabel("n values")
 ylabel("output values from the filter")
 
 %2
