@@ -11,7 +11,12 @@ ylabel("Pulse Value")
 rng(00708981); %1. random number generator
 bits = randi([0 1],1,20);%3 randi command to create a random sequence of 1x20 vector
 ind = [1:1:20];%indices matching the 20 arrays for stem plot 
+figure
 stem(ind,bits);% 4. Stem plot-1  for PART B
+title("RANDOM BIT STREAM");
+xlabel("Indices");
+ylabel("Random Bit Value");
+
 
 B = bits; % initializing B for the conversion of 0s to -1s
 
@@ -24,7 +29,11 @@ for i = 1:20 %5. Conversion of 0s to -1 in a for loop and leaving the 1s to be 1
     end 
 end
 
+figure
 stem(ind,B); %6. Stem plot-2 for PART B
+title("RANDOM BIT STREAM MODIFIED");
+xlabel("Indices");
+ylabel("Random Bit Value");
 
 %PART C
 negpulse = -pulse; %creating an inverted pulse of the prototype pulse
@@ -41,7 +50,12 @@ end
 
 Fs = 10e3;%2. Sampling Rate is 10kHz
 t = [0:1/Fs:279/Fs]; % creating a time period for the 280 elements in x with the sampling rate of Fs = 10kHz
+figure
 plot(t,x);% plot of x and t
+title("DT PULSE");
+xlabel("Time (sec)")
+ylabel("DT Values")
+
         
 axis([-2/Fs 32/Fs -1.5 1.5]); % restricing 
 
