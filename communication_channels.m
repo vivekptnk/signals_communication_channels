@@ -124,14 +124,14 @@ yfft = fftshift(fft(y));
 
 figure
 subplot(2,1,1)
-title("Input Signal x");
 plot(f1/pi, 20*log10(abs(H1))); %plotting the input signal 
+title("Input Signal x");
 xlabel("omega(rad/sec)");
 ylabel("Magnitude of x (dB)")
 
 subplot(2,1,2)
-title("Output Signal y");
 plot(f2/pi, 20*log10(abs(H2))); %plotting the output signal
+title("Output Signal y");
 xlabel("omega(rad/sec)");
 ylabel("Magnitude of y (dB)");
 
