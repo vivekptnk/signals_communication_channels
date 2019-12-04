@@ -98,19 +98,22 @@ ylabel("Magnitude (dB)")
 y = filter(bn,a,x); % a) applying input x to the filter with derived bn and default aa
 tt = [0:1/Fs:279/Fs]; % time for both input and output signals with sampling rate 10kHz
 
-subplot(2,1,1)
-plot(tt,x);
+subplot(2,1,1)% b)Subplot for input plot
+plot(tt,x); % input plot
 title("Input Signal")
 ylabel("Input Values x")
 xlabel("Time (sec)")
 axis([-2/Fs 32/Fs -1.5 1.5])
 
-subplot(2,1,2)
-plot(tt,y);
+subplot(2,1,2)% Subplot for output plot
+plot(tt,y);% output plot
 title("Onput Signal")
 ylabel("Onput Values y")
 xlabel("Time (sec)")
 axis([-2/Fs 32/Fs -900 900])
+
+%4
+
 
 
 
