@@ -1,16 +1,21 @@
-%partA
-pulse = [zeros(1,2),ones(1,10),zeros(1,2)];
-ind1 = [0:1:13];
-stem(ind1,pulse);
+%PART A
+pulse = [zeros(1,2),ones(1,10),zeros(1,2)]; %1. zeros and ones making the pulse
+ind1 = [0:1:13]; %setting the indices to have 14 places for the stem plot
+figure
+stem(ind1,pulse); %the stem plot for PART A
+title("PROTOTYPE PULSE");
+xlabel("DT Time Index");
+ylabel("Pulse Value")
 
-%partB
-rng(00708981);
-bits = randi([0 1],1,20);
-ind = [1:1:20];
-stem(ind,bits);
-B = bits;
+%PART B
+rng(00708981); %1. random number generator
+bits = randi([0 1],1,20);%3 randi command to create a random sequence of 1x20 vector
+ind = [1:1:20];%indices matching the 20 arrays for stem plot 
+stem(ind,bits);% 4. Stem plot-1  for PART B
 
-for i = 1:20
+B = bits; % initializing B for the conversion of 0s to -1s
+
+for i = 1:20 %5. Conversion of 0s to -1 in a for loop and leaving the 1s to be 1s
     if B(i) == 0 
         B(i) = -1;
         i = i+1;
@@ -19,12 +24,12 @@ for i = 1:20
     end 
 end
 
-stem(ind,B);
+stem(ind,B); %6. Stem plot-2 for PART B
 
-%partC
-negpulse = -pulse;
-x = []
-for i = 1:20 
+%PART C
+negpulse = -pulse; %creating an inverted pulse of the prototype pulse
+x = []; % initializing x
+for i = 1:20 %1. making a for loop for creating a DT version of the illustrated figure using the prototype pulse and a negative of the prototpye pulse
     if B(i) == 1
         x = horzcat(x,pulse);
         i = i + 1;
@@ -34,11 +39,11 @@ for i = 1:20
     end
 end
 
-Fs = 10e3;
-t = [0:1/Fs:279/Fs];
-plot(t,x);
+Fs = 10e3;%2. Sampling Rate is 10kHz
+t = [0:1/Fs:279/Fs]; % creating a time period for the 280 elements in x with the sampling rate of Fs = 10kHz
+plot(t,x);% plot of x and t
         
-axis([-2/Fs 32/Fs -1.5 1.5]);
+axis([-2/Fs 32/Fs -1.5 1.5]); % restricing 
 
 
 %partD
@@ -47,7 +52,7 @@ bn0 = [1 0 0 0.9];
 a = [1 0 0 0];
 f = filter(bn0, a, pulse);
 
-n = 0:1:14;
+n = 1:1:13;
 
 stem(n,f);
 
@@ -56,6 +61,15 @@ bn1 = [2 0 0 0.9];
 bn2 = [4 0 0 0.7];
 f1 = filter(bn1,a,pulse);
 bn = filter(bn2,a,f1);
+zplane(bn) % a)pole-zero
+[H,f] = freqz(bn) %b) freq resp
+dbbn = mag2db(abs(H)); %convert to decibal scale
+plot(f/pi,dbbn)
+
+
+
+
+
 
 
 
