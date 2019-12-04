@@ -18,6 +18,8 @@ xlabel("Indices");
 ylabel("Random Bit Value");
 
 
+
+
 B = bits; % initializing B for the conversion of 0s to -1s
 
 for i = 1:20 %5. Conversion of 0s to -1 in a for loop and leaving the 1s to be 1s
@@ -98,6 +100,7 @@ ylabel("Magnitude (dB)")
 y = filter(bn,a,x); % a) applying input x to the filter with derived bn and default aa
 tt = [0:1/Fs:279/Fs]; % time for both input and output signals with sampling rate 10kHz
 
+figure
 subplot(2,1,1)% b)Subplot for input plot
 plot(tt,x); % input plot
 title("Input Signal")
@@ -113,9 +116,24 @@ xlabel("Time (sec)")
 axis([-2/Fs 32/Fs -900 900])
 
 %4
+xfft = fftshift(fft(x));
+yfft = fftshift(fft(y));
+    
+[H1,f1] = freqz(x);
+[H2,f2] = freqz(y);
 
+figure
+subplot(2,1,1)
+title("Input Signal x");
+plot(f1/pi, 20*log10(abs(H1))); %plotting the input signal 
+xlabel("omega(rad/sec)");
+ylabel("Magnitude of x (dB)")
 
-
+subplot(2,1,2)
+title("Output Signal y");
+plot(f2/pi, 20*log10(abs(H2))); %plotting the output signal
+xlabel("omega(rad/sec)");
+ylabel("Magnitude of y (dB)");
 
 
 
