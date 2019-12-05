@@ -275,6 +275,30 @@ xlabel("Time(in sec)")
 ylabel("Magnitude of y2 eq")
 
 
+%6 Gaussian Noise
+ y2_n = y2 + 0.1*randn(1,280); %6a
+ y2_eq_n = filter(an2_eq,bn2_eq,y2_n); %6b
+ 
+%6c Plotting the equalized y2
+figure
+subplot(3,1,1)
+plot(tt,x); % plotting x
+title("Plot of Input x")
+xlabel("Time(in sec)")
+ylabel("Magnitude of x")
+
+subplot(3,1,2)
+plot(tt,y2_n); % plotting y
+title("Plot of output y2 n")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y2 n")
+
+subplot(3,1,3)
+plot(tt,y2_eq_n) % plotting y_eq
+title("Plot of output y2 equalizer n")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y2 eq n")
+
 
 
 
