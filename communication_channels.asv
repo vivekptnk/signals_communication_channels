@@ -62,7 +62,7 @@ ylabel("DT Values")
 axis([-2/Fs 32/Fs -1.5 1.5]); % restricing the plot according to the guide
 
 
-%partD
+%PART D
 %1
 bn0 = [1 0 0 0.9]; %initial bn coefficients
 a = [1 0 0 0]; %default aa value
@@ -110,46 +110,43 @@ axis([-2/Fs 32/Fs -1.5 1.5])
 
 subplot(2,1,2)% Subplot for output plot
 plot(tt,y);% output plot
-title("Output Signal")
-ylabel("Output Values y")
+title("Onput Signal")
+ylabel("Onput Values y")
 xlabel("Time (sec)")
 axis([-2/Fs 32/Fs -900 900])
 
 %4
-[H1,f1] = freqz(x);
-[H2,f2] = freqz(y);
-
-q = 5; %pulse length is now 11
+xfft = fftshift(fft(x)); % FFT of x
+yfft = fftshift(fft(y)); % FFT of y
+    
+[H1,f1] = freqz(x); % getting the frequency response of the input signal
+[H2,f2] = freqz(y); % getting the frequency response of the output signal
 
 figure
 subplot(2,1,1)
 plot(f1/pi, 20*log10(abs(H1))); %plotting the input signal 
-xlabel("Omega/pi(rad/sec)")
-ylabel("Magnitude of Input Signal in dB")
-hold on
-z1 = zeros(1,22);
-z1(1:(2*q+1)) = 1;
-xfft = fftshift(fft(x));
-omegakx = (1:280)*2*pi/280;
-stem(omegakx,20*log10(abs(xfft)))
-hold off
-
-
-
-
 title("Input Signal x");
-z1 = zeros(1,22);
-z1(1:(2*q+1)) = 1;
-xfft = fftshift(fft(x));
-plot(f1/pi, 20*log10(abs(H1))); %plotting the input signal 
 xlabel("omega(rad/sec)");
 ylabel("Magnitude of x (dB)")
 
 subplot(2,1,2)
-title("Output Signal y");
 plot(f2/pi, 20*log10(abs(H2))); %plotting the output signal
+title("Output Signal y");
 xlabel("omega(rad/sec)");
 ylabel("Magnitude of y (dB)");
+
+
+% PART E
+an_eq = bn;
+bn_eq = 1;
+
+iir_eq = fftshift(fft(an_eq),bn_eq);
+f = (-5:8)*Fs;
+plot(f/pi, 20*log(abs(iir_eq)));
+
+
+
+
 
 
 

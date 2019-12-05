@@ -62,7 +62,7 @@ ylabel("DT Values")
 axis([-2/Fs 32/Fs -1.5 1.5]); % restricing the plot according to the guide
 
 
-%partD
+%PART D
 %1
 bn0 = [1 0 0 0.9]; %initial bn coefficients
 a = [1 0 0 0]; %default aa value
@@ -116,11 +116,11 @@ xlabel("Time (sec)")
 axis([-2/Fs 32/Fs -900 900])
 
 %4
-xfft = fftshift(fft(x));
-yfft = fftshift(fft(y));
+xfft = fftshift(fft(x)); % FFT of x
+yfft = fftshift(fft(y)); % FFT of y
     
-[H1,f1] = freqz(x);
-[H2,f2] = freqz(y);
+[H1,f1] = freqz(x); % getting the frequency response of the input signal
+[H2,f2] = freqz(y); % getting the frequency response of the output signal
 
 figure
 subplot(2,1,1)
@@ -134,6 +134,19 @@ plot(f2/pi, 20*log10(abs(H2))); %plotting the output signal
 title("Output Signal y");
 xlabel("omega(rad/sec)");
 ylabel("Magnitude of y (dB)");
+
+
+% PART E
+an_eq = bn;
+bn_eq = 1;
+
+iir_eq = fftshift(fft(an_eq),bn_eq);
+f = (-5:8)*Fs;
+plot(f/pi, 20*log(abs(iir_eq)));
+
+
+
+
 
 
 
