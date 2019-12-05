@@ -200,13 +200,13 @@ ylabel("Magnitude of x")
 
 subplot(3,1,2)
 plot(tt,y_n); % plotting y
-title("Plot of output y")
+title("Plot of output y with Gaussian Noise")
 xlabel("Time(in sec)")
 ylabel("Magnitude of y n")
 
 subplot(3,1,3)
 plot(tt,y_eq_n) % plotting y_eq
-title("Plot of output y eq")
+title("Plot of output y with Gaussian Noise")
 xlabel("Time(in sec)")
 ylabel("Magnitude of y eq n")
 
