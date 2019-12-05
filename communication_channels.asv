@@ -263,7 +263,7 @@ xlabel("Time(in sec)")
 ylabel("Magnitude of x")
 
 subplot(3,1,2)
-plot(tt,y2); % plotting y
+plot(tt,y2); % plotting y2
 title("Plot of output y2")
 xlabel("Time(in sec)")
 ylabel("Magnitude of y2")
@@ -275,6 +275,53 @@ xlabel("Time(in sec)")
 ylabel("Magnitude of y2 eq")
 
 
+%6 Gaussian Noise
+ y2_n = y2 + 0.1*randn(1,280); %6a
+ y2_eq_n = filter(an2_eq,bn2_eq,y2_n); %6b
+ 
+%6c Plotting the equalized y2
+figure
+subplot(3,1,1)
+plot(tt,x); % plotting x
+title("Plot of Input x")
+xlabel("Time(in sec)")
+ylabel("Magnitude of x")
+
+subplot(3,1,2)
+plot(tt,y2_n); % plotting y2_n
+title("Plot of output y2 n")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y2 n")
+
+subplot(3,1,3)
+plot(tt,y2_eq_n) % plotting y_eq_n
+title("Plot of output y2 equalizer n")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y2 eq n")
+
+
+
+%8 A new hope : bn2_min
+bn2_min = polystab(bn2)* norm(bn2)/norm(polystab(bn2)); %8a
+zplane(bn2_min) %8b PZ plot of bn2_min
+title("PZ plot of bn2_min")
+
+an2_eq_min = bn2_min; %8c equalizer
+bn2_eq_min = 1;
+
+iir_eq_min = fftshift(fft(an2_eq_min),bn2_eq_min); 
+
+zplane(iir_eq_min)% 8d PZ plot for the Equalizer
+title("PZ plot of the IIR equilizer (min)")
+
+[H5, f5] = freqz(iir_eq_min); %Frequency Response of the Equalizer Min
+
+figure 
+plot(f4/pi, 20*log10(abs(H4)),'b');
+hold on
+plot(f5/pi, 20*log10(abs(H5)),'-r');
+hold off
+legend("")
 
 
 

@@ -263,7 +263,7 @@ xlabel("Time(in sec)")
 ylabel("Magnitude of x")
 
 subplot(3,1,2)
-plot(tt,y2); % plotting y
+plot(tt,y2); % plotting y2
 title("Plot of output y2")
 xlabel("Time(in sec)")
 ylabel("Magnitude of y2")
@@ -288,19 +288,69 @@ xlabel("Time(in sec)")
 ylabel("Magnitude of x")
 
 subplot(3,1,2)
-plot(tt,y2_n); % plotting y
+plot(tt,y2_n); % plotting y2_n
 title("Plot of output y2 n")
 xlabel("Time(in sec)")
 ylabel("Magnitude of y2 n")
 
 subplot(3,1,3)
-plot(tt,y2_eq_n) % plotting y_eq
+plot(tt,y2_eq_n) % plotting y_eq_n
 title("Plot of output y2 equalizer n")
 xlabel("Time(in sec)")
 ylabel("Magnitude of y2 eq n")
 
 
 
+%8 A new hope : bn2_min
+bn2_min = polystab(bn2)* norm(bn2)/norm(polystab(bn2)); %8a
+zplane(bn2_min) %8b PZ plot of bn2_min
+title("PZ plot of bn2_min")
+
+an2_eq_min = bn2_min; %8c equalizer
+bn2_eq_min = 1;
+
+iir_eq_min = fftshift(fft(an2_eq_min),bn2_eq_min); 
+
+zplane(iir_eq_min)% 8d PZ plot for the Equalizer
+title("PZ plot of the IIR equilizer (min)")
+
+[H5, f5] = freqz(iir_eq2); %Frequency Response of the Original Equalizer
+[H6, f6] = freqz(iir_eq_min); %Frequency Response of the Original Equalizer
+
+figure 
+plot(f5/pi, 20*log10(abs(H5)),'b'); %plotting the original eq freq resp
+hold on
+plot(f6/pi, 20*log10(abs(H6)),'-r'); %plotting the new eq freq resp
+hold off
+legend('orginal eq',"new eq")
+title("Frequency Response of the original and new equalizers")
+xlabel("omega(rad/sec)")
+ylabel("Magnitude (in dB)")
+
+
+y2_eq_min = filter(an2_eq_min,bn2_eq_min,y2_eq); %8f Applying the noisy output of Channel #2 to this min_equalizer
+
+
+%8g Plotting the input and output to this channel and the output of the new
+%equalizer
+figure
+subplot(3,1,1)
+plot(tt,x); % plotting x
+title("Plot of Input x")
+xlabel("Time(in sec)")
+ylabel("Magnitude of x")
+
+subplot(3,1,2)
+plot(tt,y2); % plotting y2
+title("Plot of output y2")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y2")
+
+subplot(3,1,3)
+plot(tt,y2_eq_min) % plotting y_eq_min
+title("Plot of output y2 equalizer min")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y2 eq min")
 
 
 
