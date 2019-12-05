@@ -140,9 +140,24 @@ ylabel("Magnitude of y (dB)");
 an_eq = bn;
 bn_eq = 1;
 
-iir_eq = fftshift(fft(an_eq),bn_eq);
-f = (-5:8)*Fs;
-plot(f/pi, 20*log(abs(iir_eq)));
+iir_eq = fftshift(fft(an_eq),bn_eq); %1. creating the IIR equalizer.
+
+figure
+zplane(iir_eq); %2. PoleZero Plot for the IIR Equalizer
+title("PZ plot for IIR Equalizer")
+
+[H3, f3] = freqz(iir_eq);
+
+figure
+plot(f3/pi, 20*log10(abs(H3)),'b',f/pi,dbbn,'r-');
+legend("IIR Equalizer","Channel")
+title("Frequency Response for IIR Equalizer and Channel");
+xlabel("omega(rad/sec)")
+ylabel("Magnitude (dB)")
+
+
+
+
 
 
 
