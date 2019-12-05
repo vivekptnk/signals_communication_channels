@@ -353,6 +353,12 @@ xlabel("Time(in sec)")
 ylabel("Magnitude of y2 eq min")
 
 
+%G Modelling a Cable Channel
+%2
+pulse_fft = fftshift(fft(pulse)); %fftshift and fft of the prototype pulse
+%ind1 declared in PART A
+plot(ind1,abs(pulse_fft));
+
 
 
 
