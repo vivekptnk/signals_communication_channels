@@ -357,7 +357,13 @@ ylabel("Magnitude of y2 eq min")
 %2
 pulse_fft = fftshift(fft(pulse)); %fftshift and fft of the prototype pulse
 %ind1 declared in PART A
+figure
 plot(ind1,abs(pulse_fft));
+title("Magnitude Specturum of Proto Pulse")
+xlabel("CT Time Index")
+ylabel("Pulse Magnitude for proto pulse")
+
+
 
 
 
