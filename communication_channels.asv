@@ -146,14 +146,49 @@ figure
 zplane(iir_eq); %2. PoleZero Plot for the IIR Equalizer
 title("PZ plot for IIR Equalizer")
 
-[H3, f3] = freqz(iir_eq);
+[H3, f3] = freqz(iir_eq); %Frequency Response of the IIR Equalizer
 
 figure
-plot(f3/pi, 20*log10(abs(H3)),'b',f/pi,dbbn,'r-');
-legend("I")
+plot(f3/pi, 20*log10(abs(H3)),'b',f/pi,dbbn,'r-'); %plotting both IIR equalizer and the channel response
+legend("IIR Equalizer","Channel")
 title("Frequency Response for IIR Equalizer and Channel");
 xlabel("omega(rad/sec)")
 ylabel("Magnitude (dB)")
+
+%6 
+% a) y already exists in PART D
+% b) now for applying the channel output as input to a filter command
+%    implementing the equalizer filter
+y_eq  = filter(an_eq,bn_eq,y); % b)
+
+% c)now plotting the x,y and y_eq v time in msec (tt is already declared as
+% (0:1:279)/Fs
+figure
+subplot(3,1,1)
+plot(tt,x); % plotting x
+title("Plot of Input x")
+xlabel("Time(in sec)")
+ylabel("Magnitude of x")
+axis([0 0.03 -5e5 5e5])
+
+subplot(3,1,2)
+plot(tt,y); % plotting y
+title("Plot of output y")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y")
+axis([0 0.03 -5e5 5e5])
+
+
+subplot(3,1,3)
+plot(tt,y_eq) % plotting y_eq
+title("Plot of output y eq")
+xlabel("Time(in sec)")
+ylabel("Magnitude of y eq")
+axis([0 0.03 -5e5 5e5])
+
+
+
+
 
 
 
