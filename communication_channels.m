@@ -369,12 +369,15 @@ fc = 0.707; % cutoff for RC lowpass
 [NUMd,DENd] = bilinear(2*pi*fc,[1 2*pi*fc],Fs,fc);
 
 wd=linspace(0,pi,2048); % Set DT freq in rad/sample
-[H_bl,fb] = freqz(NUMd,DEN_d,wd); 
+[H_bl,fb] = freqz(NUMd,DENd,wd); 
 [H_ct,fct] = freqz(pulse_fft) ;
-plot(fb/pi, 20*log10(abs(H_bl),'b'));
+
+figure
+plot(fb/pi, 20*log10(abs(H_bl)),'b'); % plotting the bilinear freq resp (DT)
 hold on
-plot(fct/pi, 20*log10(abs(H_ct)),'-r');
+plot(fct/pi, 20*log10(abs(H_ct)),'-r'); % plotting the CT freq resp
 hold off
+legend ("DT Freq Resp", "CT Freq Resp")
 
 
 
