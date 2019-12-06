@@ -370,11 +370,9 @@ fc = 0.707; % cutoff for RC lowpass
 
 wd=linspace(0,pi,2048); % Set DT freq in rad/sample
 [H_bl,fb] = freqz(NUMd,DEN_d,wd); 
-[H_ct,fct] = freqz(pulse_fft) ;
-plot(fb/pi, 20*log10(abs(H_bl),'b'));
+[H_ct,fct] = freqz(x) 
+plot(fb/pi, 20*log10(abs(H_bl),'b');
 hold on
-plot(fct/pi, 20*log10(abs(H_ct)),'-r');
-hold off
 
 
 
